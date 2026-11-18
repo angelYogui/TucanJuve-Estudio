@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TucanJuve | Programas y herramientas digitales para universitarios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --negro: #111111;
+      --amarillo: #FFCC00;
+      --naranja: #F7861E;
+      --rosa: #EE2B6F;
+      --celeste: #4CC9F0;
+      --blanco: #ffffff;
+      --gris: #f6f6f6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--negro);
+      background: var(--blanco);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 { font-family: 'Anton', sans-serif; letter-spacing: 1px; font-weight: 400; }
+
+    /* ---------- NAVBAR ---------- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--negro);
+      border-bottom: 5px solid var(--amarillo);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .nav .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav .brand img { height: 48px; }
+    .nav .brand span { font-family: 'Anton', sans-serif; font-size: 1.6rem; color: var(--rosa); letter-spacing: 2px; }
+    .nav .brand span b { color: var(--celeste); font-weight: 400; }
+
+    .nav ul { list-style: none; display: flex; gap: 20px; }
+    .nav ul a {
+      color: var(--blanco);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: .9rem;
+      transition: color .3s;
+    }
+    .nav ul a:hover { color: var(--amarillo); }
+
+    /* ---------- REDES SOCIALES ---------- */
+    .redes { display: flex; gap: 10px; }
+    .redes a {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--blanco);
+      color: var(--negro);
+      transition: transform .3s, background .3s, color .3s;
+    }
+    .redes a svg { width: 20px; height: 20px; }
+    .redes a:hover { transform: translateY(-5px) rotate(-8deg); color: var(--blanco); }
+    .redes a.facebook:hover  { background: #1877F2; }
+    .redes a.instagram:hover { background: var(--rosa); }
+    .redes a.tiktok:hover    { background: var(--celeste); color: var(--negro); }
+    .redes a.youtube:hover   { background: #FF0000; }
+    .redes a.whatsapp:hover  { background: #25D366; }
+
+    .nav .redes a { width: 34px; height: 34px; }
+    .nav .redes a svg { width: 17px; height: 17px; }
+
+    .redes.grandes a { width: 56px; height: 56px; }
+    .redes.grandes a svg { width: 26px; height: 26px; }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      background: linear-gradient(135deg, var(--amarillo) 0%, var(--naranja) 100%);
+      padding: 70px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before, .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+    .hero::before { width: 320px; height: 320px; background: var(--rosa); opacity: .85; top: -120px; left: -100px; }
+    .hero::after  { width: 260px; height: 260px; background: var(--celeste); opacity: .85; bottom: -110px; right: -80px; }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero-text .portada {
+      width: 100%;
+      max-width: 460px;
+      filter: drop-shadow(3px 4px 0 rgba(0,0,0,.2));
+    }
+
+    .hero-text p {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 15px 0 25px;
+    }
+
+    .hero-logo { text-align: center; }
+    .hero-logo img {
+      width: 100%;
+      max-width: 320px;
+      animation: flotar 3s ease-in-out infinite;
+      filter: drop-shadow(0 12px 12px rgba(0,0,0,.35));
+    }
+
+    @keyframes flotar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform .3s, box-shadow .3s;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    .btn:hover { transform: translateY(-4px); box-shadow: 0 8px 0 rgba(0,0,0,.25); }
+    .btn-rosa  { background: var(--rosa); color: var(--blanco); }
+    .btn-negro { background: var(--negro); color: var(--amarillo); }
+    .btn-amarillo { background: var(--amarillo); color: var(--negro); }
+
+    /* ---------- SECCIONES ---------- */
+    section { padding: 70px 20px; }
+    .contenedor { max-width: 1100px; margin: auto; }
+
+    .titulo { text-align: center; margin-bottom: 45px; }
+    .titulo h2 { font-size: 2.6rem; }
+    .titulo h2 span { color: var(--rosa); }
+    .titulo .linea {
+      width: 90px; height: 6px; margin: 10px auto 0;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--rosa), var(--amarillo), var(--celeste));
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+    }
+
+    /* ---------- SERVICIOS ---------- */
+    .servicios { background: var(--gris); }
+
+    .card {
+      background: var(--blanco);
+      border-radius: 20px;
+      padding: 30px 25px;
+      text-align: center;
+      border-bottom: 6px solid var(--amarillo);
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+      transition: transform .3s;
+    }
+    .card:hover { transform: translateY(-10px); }
+    .card:nth-child(2) { border-color: var(--rosa); }
+    .card:nth-child(3) { border-color: var(--celeste); }
+    .card:nth-child(4) { border-color: var(--naranja); }
+
+    .card .icono { font-size: 2.8rem; }
+    .card h3 { font-size: 1.5rem; margin: 10px 0; }
+    .card p { font-size: .95rem; color: #444; }
+
+    /* ---------- PROGRAMAS ---------- */
+    .programas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 18px;
+    }
+    .programa {
+      background: var(--negro);
+      color: var(--blanco);
+      border-radius: 18px;
+      padding: 22px 12px;
+      text-align: center;
+      font-weight: 600;
+      font-size: .9rem;
+      transition: transform .3s, background .3s, color .3s;
+    }
+    .programa .ico { font-size: 2.2rem; display: block; margin-bottom: 6px; }
+    .programa small { display: block; color: var(--amarillo); font-weight: 400; font-size: .75rem; }
+    .programa:hover { transform: translateY(-8px) scale(1.04); background: var(--amarillo); color: var(--negro); }
+    .programa:hover small { color: var(--negro); }
+
+    /* ---------- CARRERAS ---------- */
+    .carreras { background: var(--gris); }
+    .carreras-lista { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+
+    .chip {
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      color: var(--blanco);
+      transition: transform .3s;
+      cursor: default;
+    }
+    .chip:hover { transform: scale(1.12) rotate(-2deg); }
+    .chip:nth-child(4n+1) { background: var(--rosa); }
+    .chip:nth-child(4n+2) { background: var(--celeste); color: var(--negro); }
+    .chip:nth-child(4n+3) { background: var(--negro); color: var(--amarillo); }
+    .chip:nth-child(4n+4) { background: var(--naranja); }
+
+    /* ---------- PAQUETES ---------- */
+    .paquete {
+      background: var(--blanco);
+      border: 4px solid var(--negro);
+      border-radius: 24px;
+      padding: 35px 25px;
+      text-align: center;
+      position: relative;
+      transition: transform .3s;
+    }
+    .paquete:hover { transform: translateY(-10px); }
+    .paquete h3 { font-size: 1.8rem; }
+    .paquete .precio { font-family: 'Anton', sans-serif; font-size: 2.8rem; color: var(--rosa); margin: 8px 0; }
+    .paquete .precio small { font-size: 1rem; color: #555; font-family: 'Poppins', sans-serif; }
+    .paquete ul { list-style: none; margin: 15px 0 25px; text-align: left; }
+    .paquete li { padding: 6px 0; border-bottom: 1px dashed #ddd; font-size: .95rem; }
+    .paquete li::before { content: "✔ "; color: var(--celeste); font-weight: 700; }
+    .paquete.destacado { background: var(--amarillo); border-color: var(--rosa); transform: scale(1.04); }
+    .paquete.destacado:hover { transform: scale(1.04) translateY(-10px); }
+    .paquete .etiqueta {
+      position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+      background: var(--rosa); color: var(--blanco);
+      padding: 4px 18px; border-radius: 50px; font-weight: 700; font-size: .8rem;
+    }
+
+    /* ---------- PASOS ---------- */
+    .pasos { background: var(--negro); color: var(--blanco); }
+    .pasos .titulo h2 { color: var(--amarillo); }
+
+    .paso { text-align: center; padding: 20px; }
+    .paso .num {
+      width: 70px; height: 70px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      background: var(--amarillo);
+      color: var(--negro);
+      font-family: 'Anton', sans-serif;
+      font-size: 2rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 0 6px var(--rosa);
+    }
+    .paso:nth-child(2) .num { box-shadow: 0 0 0 6px var(--celeste); }
+    .paso:nth-child(3) .num { box-shadow: 0 0 0 6px var(--naranja); }
+    .paso h3 { font-size: 1.4rem; margin-bottom: 6px; }
+    .paso p { font-size: .95rem; color: #ddd; }
+
+    /* ---------- CONTACTO ---------- */
+    .contacto {
+      background: linear-gradient(135deg, var(--celeste), var(--rosa));
+      text-align: center;
+      color: var(--blanco);
+    }
+    .contacto h2 { font-size: 2.6rem; margin-bottom: 10px; }
+    .contacto p { max-width: 600px; margin: 0 auto 25px; font-weight: 600; }
+    .contacto .redes { justify-content: center; margin-top: 30px; }
+    .contacto h3 { margin-top: 35px; font-size: 1.4rem; }
+
+    .datos {
+      display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+      margin-top: 25px; font-weight: 600;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      background: var(--negro);
+      color: var(--blanco);
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 5px solid var(--amarillo);
+      font-size: .9rem;
+    }
+    footer .redes { justify-content: center; margin-bottom: 15px; }
+    footer .redes a { background: #2a2a2a; color: var(--blanco); }
+    footer b { color: var(--rosa); }
+    footer span { color: var(--celeste); }
+
+    /* ---------- WHATSAPP FLOTANTE ---------- */
+    .wsp-flotante {
+      position: fixed;
+      right: 20px; bottom: 20px;
+      width: 62px; height: 62px;
+      border-radius: 50%;
+      background: #25D366;
+      color: var(--blanco);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 16px rgba(0,0,0,.35);
+      z-index: 200;
+      animation: pulso 2s infinite;
+    }
+    .wsp-flotante svg { width: 32px; height: 32px; }
+
+    @keyframes pulso {
+      0% { box-shadow: 0 0 0 0 rgba(37,211,102,.7); }
+      70% { box-shadow: 0 0 0 18px rgba(37,211,102,0); }
+      100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) {
+      .nav ul { display: none; }
+    }
+    @media (max-width: 800px) {
+      .hero-content { grid-template-columns: 1fr; text-align: center; }
+      .hero-text .portada { margin: auto; display: block; }
+      .titulo h2, .contacto h2 { font-size: 2rem; }
+      .paquete.destacado { transform: none; }
+      .paquete.destacado:hover { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header>
+    <nav class="nav">
+      <a href="#inicio" class="brand">
+        <img src="logo_digital_juvenil.png" alt="Logo TucanJuve">
+        <span>TUCAN<b>Juve</b></span>
+      </a>
+
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#programas">Programas</a></li>
+        <li><a href="#paquetes">Paquetes</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+
+      <!-- Redes en la barra -->
+      <div class="redes">
+        <a class="facebook" href="https://www.facebook.com/profile.php?id=61583397526979" target="_blank" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8.5a.5.5 0 0 1 .5-.5z"/></svg>
+        </a>
+        <a class="instagram" href="https://www.instagram.com/tucanjuve" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a class="tiktok" href="https://www.tiktok.com/@tucan.juve" target="_blank" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3v11.5a4.5 4.5 0 1 1-4.5-4.5"/><path d="M15 3c.3 2.5 2 4.2 5 4.5"/></svg>
+        </a>
+        <a class="youtube" href="https://www.youtube.com/@TucanJuve" target="_blank" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <div class="hero-text">
+        <img class="portada" src="portada_digital.png" alt="TucanJuve">
+        <p>Instalamos los programas y herramientas digitales que necesitas para estudiar tu carrera universitaria. ¡Tú estudia, nosotros lo dejamos listo!</p>
+        <a href="#contacto" class="btn btn-rosa">¡Quiero mi instalación!</a>
+        <a href="#paquetes" class="btn btn-negro">Ver paquetes</a>
+      </div>
+      <div class="hero-logo">
+        <img src="logo_digital_juvenil.png" alt="Tucán TucanJuve">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICIOS ===== -->
+  <section class="servicios" id="servicios">
+    <div class="contenedor">
+      <div class="titulo">
+        <h2>Nuestros <span>Servicios</span></h2>
+        <div class="linea"></div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="icono">💻</div>
+          <h3>Instalación de programas</h3>
+          <p>Instalamos y configuramos el software que tu carrera necesita, listo para usar.</p>
+        </div>
+        <div class="card">
+          <div class="icono">🛠️</div>
+          <h3>Herramientas digitales</h3>
+          <p>Apps y plataformas para estudiar, investigar, organizar y entregar tus trabajos.</p>
+        </div>
+        <div class="card">
+          <div class="icono">⚙️</div>
+          <h3>Configuración y optimización</h3>
+          <p>Dejamos tu equipo ordenado y funcionando bien para que rinda al máximo.</p>
+        </div>
+        <div class="card">
+          <div class="icono">🎓</div>
+          <h3>Asesoría personalizada</h3>
+          <p>Te orientamos sobre qué programas necesitas según tu carrera y tu ciclo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROGRAMAS ===== -->
+  <section id="programas">
+    <div class="contenedor">
+      <div class="titulo">
+        <h2>Programas que <span>instalamos</span></h2>
+        <div class="linea"></div>
+      </div>
+
+      <div class="programas-grid">
+        <div class="programa"><span class="ico">📝</span>Office<small>Word, Excel, PowerPoint</small></div>
+        <div class="programa"><span class="ico">📐</span>AutoCAD<small>Arquitectura e Ing.</small></div>
+        <div class="programa"><span class="ico">🎨</span>Adobe<small>Photoshop, Illustrator</small></div>
+        <div class="programa"><span class="ico">🏗️</span>Revit / SketchUp<small>Diseño y modelado</small></div>
+        <div class="programa"><span class="ico">📊</span>SPSS / R<small>Estadística</small></div>
+        <div class="programa"><span class="ico">👨‍💻</span>VS Code<small>Programación</small></div>
+        <div class="programa"><span class="ico">🧮</span>MATLAB<small>Cálculo y simulación</small></div>
+        <div class="programa"><span class="ico">📚</span>Zotero / Mendeley<small>Citas y referencias</small></div>
+        <div class="programa"><span class="ico">🎥</span>Zoom / Teams<small>Clases virtuales</small></div>
+        <div class="programa"><span class="ico">🧾</span>Contabilidad<small>Software contable</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CARRERAS ===== -->
+  <section class="carreras" id="carreras">
+    <div class="contenedor">
+      <div class="titulo">
+        <h2>Para <span>tu carrera</span></h2>
+        <div class="linea"></div>
+      </div>
+
+      <div class="carreras-lista">
+        <div class="chip">Ingeniería</div>
+        <div class="chip">Arquitectura</div>
+        <div class="chip">Diseño Gráfico</div>
+        <div class="chip">Contabilidad</div>
+        <div class="chip">Administración</div>
+        <div class="chip">Medicina</div>
+        <div class="chip">Derecho</div>
+        <div class="chip">Psicología</div>
+        <div class="chip">Sistemas</div>
+        <div class="chip">Educación</div>
+        <div class="chip">Comunicaciones</div>
+        <div class="chip">¡Y muchas más!</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PAQUETES ===== -->
+  <section id="paquetes">
+    <div class="contenedor">
+      <div class="titulo">
+        <h2>Nuestros <span>Paquetes</span></h2>
+        <div class="linea"></div>
+      </div>
+
+      <div class="grid">
+        <div class="paquete">
+          <h3>Básico</h3>
+          <div class="precio">S/ 30 <small>/ instalación</small></div>
+          <ul>
+            <li>Paquete Office</li>
+            <li>Navegador y PDF</li>
+            <li>Antivirus básico</li>
+          </ul>
+          <a href="#contacto" class="btn btn-negro">Lo quiero</a>
+        </div>
+
+        <div class="paquete destacado">
+          <span class="etiqueta">⭐ MÁS POPULAR</span>
+          <h3>Universitario</h3>
+          <div class="precio">S/ 60 <small>/ instalación</small></div>
+          <ul>
+            <li>Todo lo del Básico</li>
+            <li>Programas de tu carrera</li>
+            <li>Herramientas de estudio</li>
+            <li>Configuración completa</li>
+          </ul>
+          <a href="#contacto" class="btn btn-rosa">Lo quiero</a>
+        </div>
+
+        <div class="paquete">
+          <h3>Pro</h3>
+          <div class="precio">S/ 100 <small>/ instalación</small></div>
+          <ul>
+            <li>Todo lo del Universitario</li>
+            <li>Software especializado</li>
+            <li>Optimización del equipo</li>
+            <li>Soporte por 1 mes</li>
+          </ul>
+          <a href="#contacto" class="btn btn-negro">Lo quiero</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROCESO ===== -->
+  <section class="pasos" id="proceso">
+    <div class="contenedor">
+      <div class="titulo">
+        <h2>¿Cómo <span style="color:var(--celeste)">funciona?</span></h2>
+        <div class="linea"></div>
+      </div>
+
+      <div class="grid">
+        <div class="paso">
+          <div class="num">1</div>
+          <h3>Cuéntanos tu carrera</h3>
+          <p>Escríbenos y dinos qué estudias y qué necesitas.</p>
+        </div>
+        <div class="paso">
+          <div class="num">2</div>
+          <h3>Elegimos las herramientas</h3>
+          <p>Armamos la lista de programas ideal para ti.</p>
+        </div>
+        <div class="paso">
+          <div class="num">3</div>
+          <h3>Instalamos todo</h3>
+          <p>Dejamos tu equipo listo para empezar a estudiar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACTO ===== -->
+  <section class="contacto" id="contacto">
+    <div class="contenedor">
+      <h2>¡Hablemos!</h2>
+      <p>Escríbenos y deja tu equipo listo para tu próximo ciclo universitario.</p>
+
+      <a class="btn btn-negro" target="_blank"
+         href="https://wa.me/	51934288733?text=Hola%20TucanJuve,%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios">
+        💬 Escríbenos por WhatsApp
+      </a>
+
+      <div class="datos">
+        <span>📞 +51 934 288 733</span>
+        <span>✉️ contacto@tucanjuve.com</span>
+        <span>📍 La Libertad, Perú</span>
+      </div>
+
+      <h3>¡SÍGUENOS EN NUESTRAS REDES!</h3>
+      <div class="redes grandes">
+        <a class="facebook" href="https://www.facebook.com/profile.php?id=61583397526979" target="_blank" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8.5a.5.5 0 0 1 .5-.5z"/></svg>
+        </a>
+        <a class="instagram" href="https://www.instagram.com/tucanjuve" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a class="tiktok" href="https://www.tiktok.com/@tucan.juve" target="_blank" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3v11.5a4.5 4.5 0 1 1-4.5-4.5"/><path d="M15 3c.3 2.5 2 4.2 5 4.5"/></svg>
+        </a>
+        <a class="youtube" href="https://www.youtube.com/@TucanJuve" target="_blank" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>
+        </a>
+        <a class="whatsapp" href="https://wa.me/	51934288733" target="_blank" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.7-5A9 9 0 1 1 8 19.3L3 21z"/><path d="M9 9c0 3 3 6 6 6l1.5-1.5-2-1-1 .8c-1-.4-2-1.4-2.4-2.4l.8-1-1-2L9 9z" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="redes">
+      <a class="facebook" href="https://www.facebook.com/profile.php?id=61583397526979" target="_blank" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8.5a.5.5 0 0 1 .5-.5z"/></svg>
+      </a>
+      <a class="instagram" href="https://www.instagram.com/tucanjuve" target="_blank" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      </a>
+      <a class="tiktok" href="https://www.tiktok.com/@tucan.juve" target="_blank" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3v11.5a4.5 4.5 0 1 1-4.5-4.5"/><path d="M15 3c.3 2.5 2 4.2 5 4.5"/></svg>
+      </a>
+      <a class="youtube" href="https://www.youtube.com/@TucanJuve" target="_blank" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>
+      </a>
+    </div>
+    © <span id="anio"></span> <b>TUCAN</b><span>Juve</span> · Todos los derechos reservados
+  </footer>
+
+  <!-- ===== BOTÓN FLOTANTE WHATSAPP ===== -->
+  <a class="wsp-flotante" target="_blank" aria-label="WhatsApp"
+     href="https://wa.me/	51934288733?text=Hola%20TucanJuve,%20quiero%20informaci%C3%B3n">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.7-5A9 9 0 1 1 8 19.3L3 21z"/><path d="M9 9c0 3 3 6 6 6l1.5-1.5-2-1-1 .8c-1-.4-2-1.4-2.4-2.4l.8-1-1-2L9 9z" fill="currentColor"/></svg>
+  </a>
+
+  <script>
+    document.getElementById("anio").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
