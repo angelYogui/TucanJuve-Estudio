@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TucanJuve | Detalle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --negro: #111111; --amarillo: #FFCC00; --naranja: #F7861E;
+      --rosa: #EE2B6F; --celeste: #4CC9F0; --blanco: #ffffff; --gris: #f6f6f6;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; color: var(--negro); background: var(--gris); line-height: 1.6; }
+    h1, h2, h3 { font-family: 'Anton', sans-serif; letter-spacing: 1px; font-weight: 400; }
+
+    header { background: var(--negro); border-bottom: 5px solid var(--amarillo); position: sticky; top: 0; z-index: 100; }
+    .nav { max-width: 1100px; margin: auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand img { height: 48px; }
+    .brand span { font-family: 'Anton', sans-serif; font-size: 1.6rem; color: var(--rosa); letter-spacing: 2px; }
+    .brand span b { color: var(--celeste); font-weight: 400; }
+    .volver { color: var(--blanco); text-decoration: none; font-weight: 600; transition: color .3s; }
+    .volver:hover { color: var(--amarillo); }
+
+    .contenedor { max-width: 1100px; margin: auto; padding: 40px 20px 70px; }
+
+    .detalle {
+      background: var(--blanco);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,.1);
+    }
+    .detalle-cabecera {
+      background: linear-gradient(135deg, var(--amarillo), var(--naranja));
+      padding: 40px 30px;
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .detalle-cabecera .ico { font-size: 4.5rem; }
+    .detalle-cabecera h1 { font-size: 2.6rem; }
+    .detalle-cabecera p { font-weight: 600; }
+
+    .detalle-cuerpo { padding: 35px 30px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 30px; }
+    .detalle-cuerpo h2 { font-size: 1.6rem; margin-bottom: 10px; }
+    .detalle-cuerpo h2 span { color: var(--rosa); }
+    .detalle-cuerpo ul { list-style: none; margin-bottom: 20px; }
+    .detalle-cuerpo li { padding: 7px 0; border-bottom: 1px dashed #ddd; }
+    .detalle-cuerpo li::before { content: "✔ "; color: var(--celeste); font-weight: 700; }
+
+    .caja {
+      background: var(--negro); color: var(--blanco);
+      border-radius: 20px; padding: 25px; text-align: center; align-self: start;
+    }
+    .caja h3 { color: var(--amarillo); font-size: 1.5rem; margin-bottom: 8px; }
+    .caja .precio { font-family: 'Anton', sans-serif; font-size: 2.4rem; color: var(--rosa); }
+
+    .btn {
+      display: inline-block; padding: 14px 28px; border-radius: 50px; margin-top: 15px;
+      font-weight: 700; text-decoration: none; transition: transform .3s, box-shadow .3s;
+    }
+    .btn:hover { transform: translateY(-4px); box-shadow: 0 8px 0 rgba(0,0,0,.25); }
+    .btn-wsp { background: #25D366; color: var(--blanco); }
+
+    .mas { margin-top: 50px; }
+    .mas h2 { font-size: 2rem; text-align: center; margin-bottom: 25px; }
+    .mas h2 span { color: var(--rosa); }
+    .mas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+    .mas-grid a {
+      background: var(--negro); color: var(--blanco); text-decoration: none;
+      border-radius: 18px; padding: 20px 10px; text-align: center; font-weight: 600; font-size: .9rem;
+      transition: transform .3s, background .3s, color .3s;
+    }
+    .mas-grid a:hover { transform: translateY(-8px); background: var(--amarillo); color: var(--negro); }
+    .mas-grid .ico { font-size: 2rem; display: block; }
+
+    footer { background: var(--negro); color: var(--blanco); text-align: center; padding: 25px; border-top: 5px solid var(--amarillo); font-size: .9rem; }
+    footer b { color: var(--rosa); } footer span { color: var(--celeste); }
+
+    @media (max-width: 800px) {
+      .detalle-cuerpo { grid-template-columns: 1fr; }
+      .detalle-cabecera h1 { font-size: 2rem; }
+      .volver { font-size: .85rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="nav">
+      <a href="index.html" class="brand">
+        <img src="logo_digital_juvenil.png" alt="Logo TucanJuve">
+        <span>TUCAN<b>Juve</b></span>
+      </a>
+      <a class="volver" href="index.html#programas">← Volver a programas</a>
+    </nav>
+  </header>
+
+  <main class="contenedor">
+    <div id="contenido"></div>
+
+    <section class="mas">
+      <h2>Otros <span>programas</span></h2>
+      <div class="mas-grid" id="otros"></div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="anio"></span> <b>TUCAN</b><span>Juve</span> · Todos los derechos reservados
+  </footer>
+
+  <script>
+    const WHATSAPP = "51934288733";
+
+    /* ============================================================
+       AQUÍ ESTÁ TODA LA INFORMACIÓN. Para agregar uno nuevo,
+       copia un bloque completo, cambia el id y los textos.
+       ============================================================ */
+    const programas = {
+      office: {
+        icono: "📝",
+        titulo: "Microsoft Office",
+        resumen: "Word, Excel, PowerPoint y más.",
+        descripcion: "El paquete básico de todo universitario. Lo instalamos, lo activamos y lo dejamos listo para tus trabajos, exposiciones y hojas de cálculo.",
+        incluye: ["Word, Excel y PowerPoint", "Configuración inicial", "Plantillas para trabajos universitarios"],
+        carreras: "Todas las carreras",
+        precio: "Consultar"
+      },
+      autocad: {
+        icono: "📐",
+        titulo: "AutoCAD",
+        resumen: "Dibujo técnico y planos.",
+        descripcion: "Software de dibujo y diseño en 2D y 3D. Lo instalamos y lo configuramos para que puedas empezar a dibujar tus planos desde el primer día.",
+        incluye: ["Instalación completa", "Configuración de unidades y plantillas", "Verificación de que funcione bien en tu equipo"],
+        carreras: "Arquitectura, Ingeniería Civil, Industrial, Mecánica",
+        precio: "Consultar"
+      },
+      adobe: {
+        icono: "🎨",
+        titulo: "Adobe",
+        resumen: "Photoshop, Illustrator y más.",
+        descripcion: "Herramientas de diseño gráfico, edición de imágenes y video para tus proyectos creativos.",
+        incluye: ["Photoshop e Illustrator", "Configuración del espacio de trabajo", "Fuentes y recursos básicos"],
+        carreras: "Diseño Gráfico, Comunicaciones, Arquitectura",
+        precio: "Consultar"
+      },
+      revit: {
+        icono: "🏗️",
+        titulo: "Revit / SketchUp",
+        resumen: "Diseño y modelado.",
+        descripcion: "Programas para modelar edificios y espacios en 3D, ideales para proyectos de arquitectura e ingeniería.",
+        incluye: ["Instalación de Revit y/o SketchUp", "Bibliotecas básicas", "Ajustes de rendimiento"],
+        carreras: "Arquitectura, Ingeniería Civil",
+        precio: "Consultar"
+      },
+      spss: {
+        icono: "📊",
+        titulo: "SPSS / R",
+        resumen: "Estadística y análisis de datos.",
+        descripcion: "Herramientas para analizar datos, hacer gráficos y preparar tus trabajos de investigación.",
+        incluye: ["Instalación de SPSS y/o R", "RStudio configurado", "Paquetes más usados"],
+        carreras: "Psicología, Medicina, Administración, Ingeniería",
+        precio: "Consultar"
+      },
+      vscode: {
+        icono: "👨‍💻",
+        titulo: "VS Code",
+        resumen: "Programación.",
+        descripcion: "El editor de código más usado. Lo dejamos listo con las extensiones y lenguajes que necesites para tus cursos.",
+        incluye: ["VS Code con extensiones útiles", "Python, Java o Node.js según tu curso", "Git configurado"],
+        carreras: "Sistemas, Ingeniería de Software, Electrónica",
+        precio: "Consultar"
+      },
+      matlab: {
+        icono: "🧮",
+        titulo: "MATLAB",
+        resumen: "Cálculo y simulación.",
+        descripcion: "Programa para cálculo numérico, simulaciones y análisis técnico en carreras de ingeniería.",
+        incluye: ["Instalación y configuración", "Toolboxes necesarios", "Prueba de funcionamiento"],
+        carreras: "Ingeniería, Física, Matemática",
+        precio: "Consultar"
+      },
+      zotero: {
+        icono: "📚",
+        titulo: "Zotero / Mendeley",
+        resumen: "Citas y referencias.",
+        descripcion: "Organiza tus fuentes y genera citas y bibliografías en segundos para tus tesis y trabajos.",
+        incluye: ["Instalación y conexión con Word", "Estilo APA configurado", "Guía rápida de uso"],
+        carreras: "Todas las carreras",
+        precio: "Consultar"
+      },
+      zoom: {
+        icono: "🎥",
+        titulo: "Zoom / Teams",
+        resumen: "Clases virtuales.",
+        descripcion: "Dejamos tu equipo listo para clases en línea: cámara, micrófono y plataformas probadas.",
+        incluye: ["Zoom, Teams y Meet", "Prueba de audio y video", "Configuración de cuenta"],
+        carreras: "Todas las carreras",
+        precio: "Consultar"
+      },
+      contabilidad: {
+        icono: "🧾",
+        titulo: "Software contable",
+        resumen: "Contabilidad y finanzas.",
+        descripcion: "Programas de contabilidad y gestión para practicar y entregar tus trabajos con herramientas reales.",
+        incluye: ["Instalación del software contable", "Plantillas en Excel", "Orientación de uso"],
+        carreras: "Contabilidad, Administración, Economía",
+        precio: "Consultar"
+      }
+    };
+
+    /* ---------- Lee el id de la dirección: detalle.html?id=autocad ---------- */
+    const id = new URLSearchParams(window.location.search).get("id");
+    const p = programas[id];
+    const contenido = document.getElementById("contenido");
+
+    if (p) {
+      document.title = "TucanJuve | " + p.titulo;
+      const mensaje = encodeURIComponent("Hola TucanJuve, quiero información sobre la instalación de " + p.titulo);
+
+      contenido.innerHTML = `
+        <article class="detalle">
+          <div class="detalle-cabecera">
+            <span class="ico">${p.icono}</span>
+            <div>
+              <h1>${p.titulo}</h1>
+              <p>${p.resumen}</p>
+            </div>
+          </div>
+          <div class="detalle-cuerpo">
+            <div>
+              <h2>¿Qué es y <span>para qué sirve?</span></h2>
+              <p style="margin-bottom:20px">${p.descripcion}</p>
+              <h2>Lo que <span>incluye</span></h2>
+              <ul>${p.incluye.map(i => `<li>${i}</li>`).join("")}</ul>
+              <h2>Ideal para</h2>
+              <p>${p.carreras}</p>
+            </div>
+            <aside class="caja">
+              <h3>¿Lo necesitas?</h3>
+              <div class="precio">${p.precio}</div>
+              <p>Escríbenos y lo instalamos en tu equipo.</p>
+              <a class="btn btn-wsp" target="_blank" href="https://wa.me/${WHATSAPP}?text=${mensaje}">💬 Pedir por WhatsApp</a>
+            </aside>
+          </div>
+        </article>`;
+    } else {
+      contenido.innerHTML = `
+        <article class="detalle">
+          <div class="detalle-cuerpo" style="grid-template-columns:1fr;text-align:center">
+            <div>
+              <h2>No encontramos ese programa 😕</h2>
+              <a class="btn btn-wsp" style="background:var(--rosa)" href="index.html#programas">Volver a programas</a>
+            </div>
+          </div>
+        </article>`;
+    }
+
+    /* ---------- "Otros programas" (todos menos el que estás viendo) ---------- */
+    document.getElementById("otros").innerHTML = Object.entries(programas)
+      .filter(([clave]) => clave !== id)
+      .map(([clave, x]) => `<a href="detalle.html?id=${clave}"><span class="ico">${x.icono}</span>${x.titulo}</a>`)
+      .join("");
+
+    document.getElementById("anio").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
