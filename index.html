@@ -553,9 +553,11 @@
       <ul id="menuLista">
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#programas">Programas</a></li>
+        <li><a href="#programas">Próximamente</a></li>
         <li><a href="#paquetes">Paquetes</a></li>
+        <li><a href="#soporte">Soporte remoto</a></li>
         <li><a href="#contacto">Contacto</a></li>
+                <li id="liAdmin" hidden><a href="#" id="abrirAdmin">🛠 Panel administrativo</a></li>
       </ul>
 
       <!-- Redes en la barra -->
@@ -631,26 +633,19 @@
     </div>
   </section>
 
-  <!-- ===== PROGRAMAS ===== -->
-  <section id="programas">
-    <div class="contenedor">
-      <div class="titulo">
-        <h2>Programas que <span>instalamos</span></h2>
-        <div class="linea"></div>
+  <!-- ===== PROGRAMAS (PRÓXIMAMENTE) ===== -->
+  <section class="proximamente" id="programas">
+    <div class="prox-caja">
+      <span class="prox-etiqueta">🚀 PRÓXIMAMENTE</span>
+      <h2>Instalación de <span>programas especializados</span></h2>
+      <p>Estamos aprendiendo y practicando para ofrecerte instalaciones de programas de carrera con calidad. Mientras tanto, puedes contratar nuestro soporte remoto y el pack estudiante.</p>
+      <div class="prox-items">
+        <span>📐 Programas de ingeniería</span>
+        <span>🎨 Diseño</span>
+        <span>📊 Estadística</span>
+        <span>👨‍💻 Programación</span>
       </div>
-
-            <div class="programas-grid">
-        <a class="programa" href="detalle.html?id=office"><span class="ico">📝</span>Office<small>Word, Excel, PowerPoint</small></a>
-        <a class="programa" href="detalle.html?id=autocad"><span class="ico">📐</span>AutoCAD<small>Arquitectura e Ing.</small></a>
-        <a class="programa" href="detalle.html?id=adobe"><span class="ico">🎨</span>Adobe<small>Photoshop, Illustrator</small></a>
-        <a class="programa" href="detalle.html?id=revit"><span class="ico">🏗️</span>Revit / SketchUp<small>Diseño y modelado</small></a>
-        <a class="programa" href="detalle.html?id=spss"><span class="ico">📊</span>SPSS / R<small>Estadística</small></a>
-        <a class="programa" href="detalle.html?id=vscode"><span class="ico">👨‍💻</span>VS Code<small>Programación</small></a>
-        <a class="programa" href="detalle.html?id=matlab"><span class="ico">🧮</span>MATLAB<small>Cálculo y simulación</small></a>
-        <a class="programa" href="detalle.html?id=zotero"><span class="ico">📚</span>Zotero / Mendeley<small>Citas y referencias</small></a>
-        <a class="programa" href="detalle.html?id=zoom"><span class="ico">🎥</span>Zoom / Teams<small>Clases virtuales</small></a>
-        <a class="programa" href="detalle.html?id=contabilidad"><span class="ico">🧾</span>Contabilidad<small>Software contable</small></a>
-      </div>
+      <a href="#soporte" class="btn btn-rosa" style="margin-top:20px">Ver soporte remoto</a>
     </div>
   </section>
 
@@ -692,52 +687,103 @@
       </div>
     </div>
   </section>
-
-  <!-- ===== PAQUETES ===== -->
-  <section id="paquetes">
+  <!-- ===== SOPORTE REMOTO ===== -->
+  <section class="soporte" id="soporte">
     <div class="contenedor">
       <div class="titulo">
-        <h2>Nuestros <span>Paquetes</span></h2>
+        <h2>Soporte <span>remoto</span> y recursos</h2>
         <div class="linea"></div>
       </div>
 
-      <div class="grid">
-        <div class="paquete">
-          <h3>Básico</h3>
-          <div class="precio">S/ 30 <small>/ instalación</small></div>
+      <div class="sop-grid">
+
+        <div class="sop-card">
+          <div class="icono">🧹</div>
+          <h3>Limpieza y Aceleración</h3>
+          <div class="precio">S/ 25 - 30</div>
+          <div class="tiempo">⏱ Aprox. 20 minutos · Remoto</div>
           <ul>
-            <li>Paquete Office</li>
-            <li>Navegador y PDF</li>
-            <li>Antivirus básico</li>
+            <li>Borrado de archivos temporales</li>
+            <li>Desactivar programas del inicio</li>
+            <li>Limpieza de navegadores</li>
+            <li>Quitar programas innecesarios</li>
           </ul>
-          <a href="#contacto" class="btn btn-negro">Lo quiero</a>
+          <a class="btn btn-negro" target="_blank"
+             href="https://wa.me/51934288733?text=Hola%20TucanJuve,%20quiero%20el%20servicio%20de%20Limpieza%20y%20Aceleraci%C3%B3n">
+            💬 Pedir por WhatsApp
+          </a>
         </div>
 
-        <div class="paquete destacado">
-          <span class="etiqueta">⭐ MÁS POPULAR</span>
-          <h3>Universitario</h3>
-          <div class="precio">S/ 60 <small>/ instalación</small></div>
+        <div class="sop-card">
+          <span class="sop-etiqueta">⭐ MÁS COMPLETO</span>
+          <div class="icono">🎒</div>
+          <h3>Pack Estudiante</h3>
+          <div class="precio">S/ 35 - 40</div>
+          <div class="tiempo">⏱ Remoto</div>
           <ul>
-            <li>Todo lo del Básico</li>
-            <li>Programas de tu carrera</li>
-            <li>Herramientas de estudio</li>
-            <li>Configuración completa</li>
+            <li>Todo lo de la limpieza básica</li>
+            <li>LibreOffice u Office universitario</li>
+            <li>Lector de PDF</li>
+            <li>Zoom / Teams</li>
+            <li>Descompresor de archivos</li>
           </ul>
-          <a href="#contacto" class="btn btn-rosa">Lo quiero</a>
+          <a class="btn btn-rosa" target="_blank"
+             href="https://wa.me/51934288733?text=Hola%20TucanJuve,%20quiero%20el%20Pack%20Estudiante">
+            💬 Pedir por WhatsApp
+          </a>
         </div>
 
-        <div class="paquete">
-          <h3>Pro</h3>
-          <div class="precio">S/ 100 <small>/ instalación</small></div>
+        <div class="sop-card">
+          <div class="icono">📄</div>
+          <h3>Kit de Plantillas Académicas</h3>
+          <div class="precio">S/ 15</div>
+          <div class="tiempo">⬇ Descarga digital · Sin conexión remota</div>
           <ul>
-            <li>Todo lo del Universitario</li>
-            <li>Software especializado</li>
-            <li>Optimización del equipo</li>
-            <li>Soporte por 1 mes</li>
+            <li>Plantillas de Word con normas APA</li>
+            <li>Para tesis y monografías</li>
+            <li>Diapositivas limpias para exposiciones</li>
+            <li>Entrega por enlace tras pagar con Yape o Plin</li>
           </ul>
-          <a href="#contacto" class="btn btn-negro">Lo quiero</a>
+          <a class="btn btn-negro" target="_blank"
+             href="https://wa.me/51934288733?text=Hola%20TucanJuve,%20quiero%20el%20Kit%20de%20Plantillas%20Acad%C3%A9micas">
+            💬 Pedir por WhatsApp
+          </a>
+        </div>
+
+      </div>
+
+      <div class="sop-doble">
+        <div class="sop-caja sop-si">
+          <h3>Lo que hacemos a distancia</h3>
+          <ul>
+            <li>Limpieza y aceleración del equipo</li>
+            <li>Desinstalar programas basura</li>
+            <li>Instalar y configurar herramientas gratuitas</li>
+            <li>Ayuda con la cuenta universitaria de Microsoft 365</li>
+          </ul>
+        </div>
+        <div class="sop-caja sop-no">
+          <h3>Lo que NO hacemos por remoto</h3>
+          <ul>
+            <li>Formateos: solo de forma presencial</li>
+            <li>Cambios en configuración de red</li>
+            <li>Cambios en la BIOS</li>
+          </ul>
         </div>
       </div>
+
+      <div class="titulo" style="margin-bottom:30px">
+        <h2 style="font-size:2rem">¿Cómo <span>funciona?</span></h2>
+        <div class="linea"></div>
+      </div>
+      <div class="sop-pasos">
+        <div class="sop-paso"><h4>Escríbenos</h4><p>Cuéntanos qué necesita tu equipo.</p></div>
+        <div class="sop-paso"><h4>Instala AnyDesk o RustDesk</h4><p>Te enviamos una guía con capturas.</p></div>
+        <div class="sop-paso"><h4>Comparte tu código</h4><p>Nos conectamos solo mientras dura el servicio.</p></div>
+        <div class="sop-paso"><h4>Listo y pagado</h4><p>Pagas por Yape o Plin y tu equipo queda más rápido.</p></div>
+      </div>
+
+      <p class="sop-nota">Los precios pueden variar según el estado del equipo. Confirmamos el costo antes de empezar.</p>
     </div>
   </section>
   
@@ -776,34 +822,6 @@
         </div>
       </div>
       <p style="text-align:center;margin-top:15px;color:#666;font-size:.9rem">Demostración realizada en equipo propio.</p>
-    </div>
-  </section>
-
-  <!-- ===== PROCESO ===== -->
-  <section class="pasos" id="proceso">
-    <div class="contenedor">
-      <div class="titulo">
-        <h2>¿Cómo <span style="color:var(--celeste)">funciona?</span></h2>
-        <div class="linea"></div>
-      </div>
-
-      <div class="grid">
-        <div class="paso">
-          <div class="num">1</div>
-          <h3>Cuéntanos tu carrera</h3>
-          <p>Escríbenos y dinos qué estudias y qué necesitas.</p>
-        </div>
-        <div class="paso">
-          <div class="num">2</div>
-          <h3>Elegimos las herramientas</h3>
-          <p>Armamos la lista de programas ideal para ti.</p>
-        </div>
-        <div class="paso">
-          <div class="num">3</div>
-          <h3>Instalamos todo</h3>
-          <p>Dejamos tu equipo listo para empezar a estudiar.</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -899,6 +917,24 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.7-5A9 9 0 1 1 8 19.3L3 21z"/><path d="M9 9c0 3 3 6 6 6l1.5-1.5-2-1-1 .8c-1-.4-2-1.4-2.4-2.4l.8-1-1-2L9 9z" fill="currentColor"/></svg>
   </a>
 
+  <!-- ===== PANEL ADMINISTRATIVO (solo para el administrador) ===== -->
+  <div class="admin-overlay" id="adminPanel" hidden>
+    <div class="admin-ventana">
+      <div class="admin-cab">
+        <h2>🛠 Panel administrativo</h2>
+        <button type="button" id="cerrarAdmin" aria-label="Cerrar panel">✕</button>
+      </div>
+      <p id="adminSaludo" class="admin-saludo"></p>
+
+      <div class="admin-tabs">
+        <button type="button" class="activo" data-filtro="pendientes">Pendientes (<span id="cntPend">0</span>)</button>
+        <button type="button" data-filtro="aprobados">Publicados (<span id="cntApr">0</span>)</button>
+      </div>
+
+      <div id="adminLista"></div>
+    </div>
+  </div>
+
   <script>
     document.getElementById("anio").textContent = new Date().getFullYear();
         /* ---------- Menú para celular ---------- */
@@ -981,6 +1017,10 @@
       $("navUsuario").hidden = !user;
       if (user) $("navUsuario").textContent = "Hola, " + (user.displayName || "amigo").split(" ")[0]; 
       {
+              esAdmin = !!user && user.uid === ADMIN_UID;
+      $("liAdmin").hidden = !esAdmin;
+      if (esAdmin) $("navUsuario").textContent = "Bienvenido " + (user.displayName || "").split(" ")[0] + " · Administrador";
+      if (!esAdmin) $("adminPanel").hidden = true;
         $("opNombre").textContent = (user.displayName || "amigo").split(" ")[0];
         console.log("Tu UID (para las reglas):", user.uid);
       }
@@ -1035,6 +1075,107 @@
         });
       } catch (e) { console.error(e); }
     }
+        /* ---------- Panel administrativo ---------- */
+    const ADMIN_UID = "iS3KPlQsxMZQKQLQEjUAzNKH9WC3";
+    let esAdmin = false;
+    let filtroAdmin = "pendientes";
+    let todosLosComentarios = [];
+
+    $("abrirAdmin").addEventListener("click", e => {
+      e.preventDefault();
+      if (!esAdmin) return;
+      $("adminSaludo").textContent = "Bienvenido " + (auth.currentUser.displayName || "").split(" ")[0] + " · Administrador";
+      $("adminPanel").hidden = false;
+      cargarAdmin();
+    });
+    $("cerrarAdmin").addEventListener("click", () => { $("adminPanel").hidden = true; });
+
+    document.querySelectorAll(".admin-tabs button").forEach(b =>
+      b.addEventListener("click", () => {
+        document.querySelectorAll(".admin-tabs button").forEach(x => x.classList.remove("activo"));
+        b.classList.add("activo");
+        filtroAdmin = b.dataset.filtro;
+        pintarAdmin();
+      }));
+
+    async function cargarAdmin() {
+      $("adminLista").textContent = "Cargando...";
+      try {
+        const snap = await getDocs(collection(db, "comentarios"));
+        todosLosComentarios = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+          .sort((a, b) => (b.fecha?.seconds || 0) - (a.fecha?.seconds || 0));
+        pintarAdmin();
+      } catch (e) {
+        console.error(e);
+        $("adminLista").textContent = "No se pudieron cargar los comentarios. Revisa las reglas de Firestore.";
+      }
+    }
+
+    function pintarAdmin() {
+      const pendientes = todosLosComentarios.filter(c => !c.aprobado);
+      const aprobados = todosLosComentarios.filter(c => c.aprobado);
+      $("cntPend").textContent = pendientes.length;
+      $("cntApr").textContent = aprobados.length;
+
+      const lista = $("adminLista");
+      const mostrar = filtroAdmin === "pendientes" ? pendientes : aprobados;
+      lista.replaceChildren();
+
+      if (!mostrar.length) {
+        const vacio = document.createElement("p");
+        vacio.textContent = "No hay comentarios en esta lista.";
+        lista.append(vacio);
+        return;
+      }
+
+      mostrar.forEach(c => {
+        const fila = document.createElement("div");
+        fila.className = "admin-item";
+
+        const texto = document.createElement("p");
+        texto.textContent = "“" + c.texto + "”";
+
+        const autor = document.createElement("div");
+        autor.className = "admin-autor";
+        autor.textContent = c.nombre + (c.recomienda ? " · ✔ Recomienda" : " · No marcó recomendar");
+
+        const acc = document.createElement("div");
+        acc.className = "admin-acc";
+
+        const btnEstado = document.createElement("button");
+        btnEstado.type = "button";
+        btnEstado.className = c.aprobado ? "adm-ocultar" : "adm-ok";
+        btnEstado.textContent = c.aprobado ? "Quitar de la página" : "Aprobar";
+        btnEstado.addEventListener("click", () => cambiarEstado(c.id, !c.aprobado));
+
+        const btnBorrar = document.createElement("button");
+        btnBorrar.type = "button";
+        btnBorrar.className = "adm-borrar";
+        btnBorrar.textContent = "Borrar";
+        btnBorrar.addEventListener("click", () => borrarComentario(c.id));
+
+        acc.append(btnEstado, btnBorrar);
+        fila.append(texto, autor, acc);
+        lista.append(fila);
+      });
+    }
+
+    async function cambiarEstado(id, valor) {
+      try {
+        await updateDoc(doc(db, "comentarios", id), { aprobado: valor });
+        await cargarAdmin();
+        cargarComentarios();
+      } catch (e) { alert("No se pudo actualizar: " + e.code); }
+    }
+
+    async function borrarComentario(id) {
+      if (!confirm("¿Borrar este comentario para siempre?")) return;
+      try {
+        await deleteDoc(doc(db, "comentarios", id));
+        await cargarAdmin();
+        cargarComentarios();
+      } catch (e) { alert("No se pudo borrar: " + e.code); }
+    }
     cargarComentarios();
   </script>
 
@@ -1073,6 +1214,129 @@
   .btn-borrar  { background: #d33; }
   .btn-salir   { background: #444; color: #fff; border: 0; border-radius: 6px; padding: 6px 12px; cursor: pointer; }
   .admin-vacio { color: #888; font-style: italic; }
+
+      /* ---------- SOPORTE REMOTO ---------- */
+    .soporte { background: var(--gris); }
+
+    .sop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+    .sop-card {
+      background: var(--blanco);
+      border-radius: 24px;
+      padding: 32px 24px;
+      text-align: center;
+      border-top: 8px solid var(--amarillo);
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+      display: flex;
+      flex-direction: column;
+      transition: transform .3s;
+      position: relative;
+    }
+    .sop-card:hover { transform: translateY(-10px); }
+    .sop-card:nth-child(2) { border-color: var(--rosa); }
+    .sop-card:nth-child(3) { border-color: var(--celeste); }
+    .sop-card .icono { font-size: 2.8rem; }
+    .sop-card h3 { font-size: 1.5rem; margin: 8px 0; }
+    .sop-card .precio { font-family: 'Anton', sans-serif; font-size: 2.4rem; color: var(--rosa); }
+    .sop-card .tiempo { font-size: .85rem; color: #666; font-weight: 600; margin-bottom: 8px; }
+    .sop-card ul { list-style: none; text-align: left; margin: 12px 0 20px; flex: 1; }
+    .sop-card li { padding: 6px 0; border-bottom: 1px dashed #ddd; font-size: .93rem; }
+    .sop-card li::before { content: "✔ "; color: var(--celeste); font-weight: 700; }
+    .sop-card .btn { margin: 0; text-align: center; }
+    .sop-etiqueta {
+      position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+      background: var(--rosa); color: var(--blanco);
+      padding: 4px 18px; border-radius: 50px; font-weight: 700; font-size: .8rem;
+      white-space: nowrap;
+    }
+
+    .sop-doble {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+    .sop-caja { border-radius: 20px; padding: 28px 25px; }
+    .sop-caja h3 { font-size: 1.5rem; margin-bottom: 10px; }
+    .sop-caja ul { list-style: none; }
+    .sop-caja li { padding: 6px 0; font-size: .95rem; }
+    .sop-si { background: var(--negro); color: var(--blanco); }
+    .sop-si h3 { color: var(--amarillo); }
+    .sop-si li::before { content: "✔ "; color: var(--celeste); font-weight: 700; }
+    .sop-no { background: var(--blanco); border: 4px dashed var(--rosa); }
+    .sop-no h3 { color: var(--rosa); }
+    .sop-no li::before { content: "✘ "; color: var(--rosa); font-weight: 700; }
+
+    .sop-pasos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      counter-reset: paso;
+    }
+    .sop-paso {
+      background: var(--blanco);
+      border-radius: 18px;
+      padding: 25px 18px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+      counter-increment: paso;
+    }
+    .sop-paso::before {
+      content: counter(paso);
+      display: flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; margin: 0 auto 10px;
+      border-radius: 50%;
+      background: var(--amarillo); color: var(--negro);
+      font-family: 'Anton', sans-serif; font-size: 1.5rem;
+      box-shadow: 0 0 0 4px var(--celeste);
+    }
+    .sop-paso h4 { font-size: 1rem; margin-bottom: 4px; }
+    .sop-paso p { font-size: .88rem; color: #444; }
+
+    .sop-nota { text-align: center; margin-top: 30px; color: #555; font-size: .9rem; }
+        /* ---------- PANEL ADMINISTRATIVO ---------- */
+    .admin-overlay {
+      position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,.7);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .admin-overlay[hidden] { display: none; }
+    .admin-ventana {
+      background: var(--blanco);
+      width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto;
+      border-radius: 20px; padding: 25px;
+      border-top: 8px solid var(--amarillo);
+    }
+    .admin-cab { display: flex; justify-content: space-between; align-items: center; }
+    .admin-cab h2 { font-size: 1.8rem; }
+    .admin-cab button {
+      background: var(--negro); color: var(--blanco); border: none;
+      width: 38px; height: 38px; border-radius: 50%; font-size: 1.1rem; cursor: pointer;
+    }
+    .admin-saludo { margin: 6px 0 15px; font-weight: 600; color: #555; }
+    .admin-tabs { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+    .admin-tabs button {
+      background: var(--gris); border: 2px solid #ddd; border-radius: 50px;
+      padding: 8px 18px; font-family: inherit; font-weight: 700; cursor: pointer;
+    }
+    .admin-tabs button.activo { background: var(--amarillo); border-color: var(--negro); }
+    .admin-item { border: 2px solid #eee; border-radius: 14px; padding: 15px; margin-bottom: 12px; }
+    .admin-item p { font-style: italic; margin-bottom: 6px; }
+    .admin-autor { font-size: .85rem; color: #666; font-weight: 600; }
+    .admin-acc { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+    .admin-acc button {
+      border: none; border-radius: 50px; padding: 8px 16px;
+      font-family: inherit; font-weight: 700; font-size: .85rem; cursor: pointer; color: var(--blanco);
+    }
+    .adm-ok { background: #1a9c4b; }
+    .adm-ocultar { background: var(--naranja); }
+    .adm-borrar { background: var(--rosa); }
+
 </style>
 
 <button id="admin-login-btn">Admin</button>
@@ -1235,6 +1499,7 @@
     try { await deleteDoc(doc(db, COLECCION, id)); }
     catch (e) { alert("No se pudo borrar: " + e.message); }
   }
+  
 </script>
 
 <!-- ============================================================
