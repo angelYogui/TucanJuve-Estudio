@@ -494,6 +494,49 @@
       background: var(--rosa);
     }
     .ad-foto.despues .tag { background: #25D366; }
+        /* ---------- OPINIONES ---------- */
+    .opiniones { background: var(--gris); }
+    .op-caja {
+      max-width: 650px; margin: 0 auto 40px; background: var(--blanco);
+      border-radius: 20px; padding: 28px; text-align: center;
+      border-top: 6px solid var(--celeste); box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    }
+    .op-caja small { display: block; margin-top: 10px; color: #666; }
+    .op-caja textarea {
+      width: 100%; margin: 10px 0; padding: 12px; border: 2px solid #ddd;
+      border-radius: 12px; font-family: inherit; font-size: .95rem; resize: vertical;
+    }
+    .op-caja label { display: block; text-align: left; font-weight: 600; margin-top: 8px; }
+    .op-link { background: none; border: none; color: var(--rosa); font-weight: 700; cursor: pointer; font-family: inherit; }
+    .op-mensaje { margin-top: 10px; font-weight: 600; }
+    .op-lista { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .op-item { background: var(--blanco); border-radius: 18px; padding: 22px; box-shadow: 0 6px 18px rgba(0,0,0,.08); }
+    .op-item p { font-style: italic; margin: 8px 0; }
+    .op-item .op-autor { font-weight: 700; }
+    .op-item .op-rec { color: #1a9c4b; font-size: .85rem; font-weight: 600; }
+        /* ---------- INICIAR SESIÓN EN LA BARRA ---------- */
+    .nav-sesion { display: flex; align-items: center; gap: 8px; }
+    .btn-nav {
+      background: var(--amarillo);
+      color: var(--negro);
+      border: none;
+      border-radius: 50px;
+      padding: 8px 16px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: .85rem;
+      cursor: pointer;
+      transition: transform .3s, background .3s;
+    }
+    .btn-nav:hover { transform: translateY(-2px); background: var(--naranja); }
+    .btn-nav-salir { background: var(--rosa); color: var(--blanco); }
+    .btn-nav-salir:hover { background: var(--celeste); color: var(--negro); }
+    .nav-usuario { color: var(--blanco); font-weight: 600; font-size: .85rem; }
+
+    @media (max-width: 600px) {
+      .nav-usuario { display: none; }
+      .btn-nav { padding: 8px 12px; }
+    }
   </style>
 </head>
 
@@ -530,6 +573,12 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>
         </a>
       </div>
+          <!-- Iniciar sesión en la barra -->
+    <div class="nav-sesion">
+      <button class="btn-nav" id="btnEntrarNav" type="button">👤 Entrar</button>
+      <span class="nav-usuario" id="navUsuario" hidden></span>
+      <button class="btn-nav btn-nav-salir" id="btnSalirNav" type="button" hidden>Salir</button>
+    </div>
         <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
     </nav>
   </header>
@@ -758,6 +807,35 @@
     </div>
   </section>
 
+  <!-- ===== OPINIONES ===== -->
+  <section class="opiniones" id="opiniones">
+    <div class="contenedor">
+      <div class="titulo">
+        <h2>Tu <span>opinión</span> cuenta</h2>
+        <div class="linea"></div>
+      </div>
+
+      <div class="op-caja">
+        <div id="op-sesion-fuera">
+          <p>Inicia sesión con Google para dejar tu comentario.</p>
+          <button class="btn btn-negro" id="btnEntrar" type="button">Entrar con Google</button>
+          <small>Solo mostramos tu primer nombre. Tu correo nunca se publica.</small>
+        </div>
+
+        <div id="op-sesion-dentro" hidden>
+          <p>Hola, <b id="opNombre"></b> · <button type="button" id="btnSalir" class="op-link">Salir</button></p>
+          <label for="opTexto">¿Qué te pareció la atención?</label>
+          <textarea id="opTexto" maxlength="500" rows="4" placeholder="Cuéntanos tu experiencia..."></textarea>
+          <label><input type="checkbox" id="opRecomienda" checked> Recomiendo este servicio</label>
+          <button class="btn btn-rosa" id="btnEnviar" type="button">Enviar comentario</button>
+          <p id="opMensaje" class="op-mensaje"></p>
+        </div>
+      </div>
+
+      <div id="opLista" class="op-lista"></div>
+    </div>
+  </section>
+
   <!-- ===== CONTACTO ===== -->
   <section class="contacto" id="contacto">
     <div class="contenedor">
@@ -861,6 +939,103 @@
     }, { threshold: 0.5 });
     contadores.forEach(c => observador.observe(c));
 
+  </script>
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp }
+      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBUalSK20rZ6r6NKBb6FYHilEJxy3Grpxg",
+      authDomain: "tucanjuvestudio.firebaseapp.com",
+      projectId: "tucanjuvestudio",
+      storageBucket: "tucanjuvestudio.firebasestorage.app",
+      messagingSenderId: "522712736628",
+      appId: "1:522712736628:web:4f2bb41706f3498d178221",
+      measurementId: "G-HSH7HJLWDK"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const $ = id => document.getElementById(id);
+
+    $("btnEntrar").addEventListener("click", () =>
+      signInWithPopup(auth, new GoogleAuthProvider())
+        .catch(e => alert("No se pudo iniciar sesión: " + e.code)));
+    $("btnSalir").addEventListener("click", () => signOut(auth));
+        $("btnEntrarNav").addEventListener("click", () =>
+      signInWithPopup(auth, new GoogleAuthProvider())
+        .catch(e => alert("No se pudo iniciar sesión: " + e.code)));
+    $("btnSalirNav").addEventListener("click", () => signOut(auth));
+
+    onAuthStateChanged(auth, user => {
+      $("op-sesion-fuera").hidden = !!user;
+      $("op-sesion-dentro").hidden = !user;
+      if (user)
+            $("btnEntrarNav").hidden = !!user;
+      $("btnSalirNav").hidden = !user;
+      $("navUsuario").hidden = !user;
+      if (user) $("navUsuario").textContent = "Hola, " + (user.displayName || "amigo").split(" ")[0]; 
+      {
+        $("opNombre").textContent = (user.displayName || "amigo").split(" ")[0];
+        console.log("Tu UID (para las reglas):", user.uid);
+      }
+    });
+
+    $("btnEnviar").addEventListener("click", async () => {
+      const user = auth.currentUser;
+      const texto = $("opTexto").value.trim();
+      const msg = $("opMensaje");
+      if (!user) return;
+      if (!texto) { msg.textContent = "Escribe un comentario primero."; return; }
+
+      try {
+        await addDoc(collection(db, "comentarios"), {
+          uid: user.uid,
+          nombre: (user.displayName || "Anónimo").split(" ")[0].slice(0, 40),
+          texto: texto.slice(0, 500),
+          recomienda: $("opRecomienda").checked,
+          aprobado: false,
+          fecha: serverTimestamp()
+        });
+        $("opTexto").value = "";
+        msg.textContent = "¡Gracias! Tu comentario se publicará cuando lo revisemos.";
+      } catch (e) {
+        msg.textContent = "No se pudo enviar. Intenta de nuevo.";
+      }
+    });
+
+    async function cargarComentarios() {
+      const lista = $("opLista");
+      try {
+        const snap = await getDocs(query(collection(db, "comentarios"), where("aprobado", "==", true)));
+        const items = snap.docs.map(d => d.data())
+          .sort((a, b) => (b.fecha?.seconds || 0) - (a.fecha?.seconds || 0));
+        lista.innerHTML = "";
+        items.forEach(c => {
+          const div = document.createElement("div");
+          div.className = "op-item";
+          const p = document.createElement("p");
+          p.textContent = "“" + c.texto + "”";
+          const autor = document.createElement("div");
+          autor.className = "op-autor";
+          autor.textContent = c.nombre;
+          div.append(p, autor);
+          if (c.recomienda) {
+            const r = document.createElement("div");
+            r.className = "op-rec";
+            r.textContent = "✔ Recomienda el servicio";
+            div.append(r);
+          }
+          lista.append(div);
+        });
+      } catch (e) { console.error(e); }
+    }
+    cargarComentarios();
   </script>
 </body>
 </html>
