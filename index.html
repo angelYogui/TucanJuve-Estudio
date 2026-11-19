@@ -1037,5 +1037,233 @@
     }
     cargarComentarios();
   </script>
+
+<style>
+  #admin-login-btn {
+    position: fixed; bottom: 14px; right: 14px; z-index: 9998;
+    background: #222; color: #fff; border: 0; border-radius: 20px;
+    padding: 8px 14px; font-size: 13px; cursor: pointer; opacity: .6;
+  }
+  #admin-login-btn:hover { opacity: 1; }
+
+  #admin-panel {
+    display: none; max-width: 900px; margin: 30px auto; padding: 20px;
+    border: 2px solid #f5a623; border-radius: 12px; background: #fffaf0;
+    font-family: system-ui, sans-serif; color: #222;
+  }
+  #admin-panel h2 { margin: 0 0 4px; }
+  #admin-panel h3 { margin: 22px 0 8px; }
+  #admin-saludo { margin: 0 0 12px; font-weight: 600; }
+  .admin-top { display: flex; justify-content: space-between; align-items: center; }
+  .admin-item {
+    background: #fff; border: 1px solid #e5e5e5; border-radius: 8px;
+    padding: 10px 12px; margin-bottom: 8px;
+    display: flex; justify-content: space-between; gap: 12px; align-items: flex-start;
+  }
+  .admin-item .cuerpo { flex: 1; min-width: 0; word-break: break-word; }
+  .admin-item .autor { font-weight: 600; }
+  .admin-item .fecha { font-size: 12px; color: #777; }
+  .admin-item .botones { display: flex; gap: 6px; flex-shrink: 0; }
+  .admin-item button {
+    border: 0; border-radius: 6px; padding: 6px 10px; cursor: pointer;
+    font-size: 13px; color: #fff;
+  }
+  .btn-aprobar { background: #2e9e4f; }
+  .btn-ocultar { background: #777; }
+  .btn-borrar  { background: #d33; }
+  .btn-salir   { background: #444; color: #fff; border: 0; border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+  .admin-vacio { color: #888; font-style: italic; }
+</style>
+
+<button id="admin-login-btn">Admin</button>
+
+<section id="admin-panel">
+  <div class="admin-top">
+    <div>
+      <h2>Panel de moderación</h2>
+      <p id="admin-saludo"></p>
+    </div>
+    <button class="btn-salir" id="admin-salir">Cerrar sesión</button>
+  </div>
+
+  <h3>Pendientes (<span id="cuenta-pendientes">0</span>)</h3>
+  <div id="lista-pendientes"></div>
+
+  <h3>Publicados (<span id="cuenta-publicados">0</span>)</h3>
+  <div id="lista-publicados"></div>
+</section>
+
+<script type="module">
+  import { getApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import {
+    getFirestore, collection, onSnapshot, doc, updateDoc, deleteDoc
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // ---------- CONFIGURA ESTO ----------
+  const ADMIN_UID = "iS3KPlQsxMZQKQLQEjUAzNKH9WC3";
+  const COLECCION = "comentarios";
+  // ------------------------------------
+
+  // Usa la app de Firebase que ya inicializaste en tu página.
+  // (Si te da error, mira la nota 3 al final del mensaje.)
+  const app  = getApp();
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  const $ = (id) => document.getElementById(id);
+  const panel      = $("admin-panel");
+  const btnLogin   = $("admin-login-btn");
+  const saludo     = $("admin-saludo");
+  let desuscribir  = null;
+
+  // --- Login / Logout ---
+  btnLogin.addEventListener("click", async () => {
+    try { await signInWithPopup(auth, new GoogleAuthProvider()); }
+    catch (e) { console.error("Error al iniciar sesión:", e); }
+  });
+  $("admin-salir").addEventListener("click", () => signOut(auth));
+
+  // --- Mostrar u ocultar panel según el usuario ---
+  onAuthStateChanged(auth, (user) => {
+    const esAdmin = !!user && user.uid === ADMIN_UID;
+
+    if (esAdmin) {
+      saludo.textContent = "Bienvenido Angel · Administrador";
+      panel.style.display = "block";
+      btnLogin.style.display = "none";
+      escucharComentarios();
+    } else {
+      panel.style.display = "none";
+      btnLogin.style.display = "block";
+      if (desuscribir) { desuscribir(); desuscribir = null; }
+    }
+  });
+
+  // --- Leer comentarios en tiempo real ---
+  function escucharComentarios() {
+    if (desuscribir) return;
+    desuscribir = onSnapshot(
+      collection(db, COLECCION),
+      (snap) => {
+        const pendientes = [], publicados = [];
+        snap.forEach((d) => {
+          const item = { id: d.id, ...d.data() };
+          (item.aprobado === true ? publicados : pendientes).push(item);
+        });
+        const porFecha = (a, b) => fechaMs(b) - fechaMs(a);
+        pendientes.sort(porFecha);
+        publicados.sort(porFecha);
+        pintar($("lista-pendientes"), pendientes, false);
+        pintar($("lista-publicados"), publicados, true);
+        $("cuenta-pendientes").textContent = pendientes.length;
+        $("cuenta-publicados").textContent = publicados.length;
+      },
+      (err) => console.error("Error leyendo comentarios:", err)
+    );
+  }
+
+  function fechaMs(c) {
+    const f = c.fecha;
+    if (!f) return 0;
+    if (typeof f.toMillis === "function") return f.toMillis();
+    const t = new Date(f).getTime();
+    return isNaN(t) ? 0 : t;
+  }
+
+  function fechaTexto(c) {
+    const ms = fechaMs(c);
+    return ms ? new Date(ms).toLocaleString("es-PE") : "";
+  }
+
+  // --- Dibujar la lista (usa textContent: seguro contra HTML malicioso) ---
+  function pintar(contenedor, lista, yaPublicado) {
+    contenedor.replaceChildren();
+    if (!lista.length) {
+      const p = document.createElement("p");
+      p.className = "admin-vacio";
+      p.textContent = "No hay comentarios aquí.";
+      contenedor.appendChild(p);
+      return;
+    }
+    lista.forEach((c) => {
+      const fila = document.createElement("div");
+      fila.className = "admin-item";
+
+      const cuerpo = document.createElement("div");
+      cuerpo.className = "cuerpo";
+      const autor = document.createElement("div");
+      autor.className = "autor";
+      autor.textContent = c.nombre || c.autor || "Anónimo";
+      const texto = document.createElement("div");
+      texto.textContent = c.texto || c.comentario || c.mensaje || "";
+      const fecha = document.createElement("div");
+      fecha.className = "fecha";
+      fecha.textContent = fechaTexto(c);
+      cuerpo.append(autor, texto, fecha);
+
+      const botones = document.createElement("div");
+      botones.className = "botones";
+
+      const bPrincipal = document.createElement("button");
+      bPrincipal.className = yaPublicado ? "btn-ocultar" : "btn-aprobar";
+      bPrincipal.textContent = yaPublicado ? "Ocultar" : "Aprobar";
+      bPrincipal.addEventListener("click", () =>
+        cambiarEstado(c.id, !yaPublicado)
+      );
+
+      const bBorrar = document.createElement("button");
+      bBorrar.className = "btn-borrar";
+      bBorrar.textContent = "Borrar";
+      bBorrar.addEventListener("click", () => borrar(c.id));
+
+      botones.append(bPrincipal, bBorrar);
+      fila.append(cuerpo, botones);
+      contenedor.appendChild(fila);
+    });
+  }
+
+  async function cambiarEstado(id, aprobado) {
+    try { await updateDoc(doc(db, COLECCION, id), { aprobado }); }
+    catch (e) { alert("No se pudo actualizar: " + e.message); }
+  }
+
+  async function borrar(id) {
+    if (!confirm("¿Borrar este comentario para siempre?")) return;
+    try { await deleteDoc(doc(db, COLECCION, id)); }
+    catch (e) { alert("No se pudo borrar: " + e.message); }
+  }
+</script>
+
+<!-- ============================================================
+     REGLAS DE FIRESTORE (esto es lo que realmente te protege)
+     Firebase Console > Firestore Database > Reglas. Reemplaza iS3KPlQsxMZQKQLQEjUAzNKH9WC3.
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function esAdmin() {
+      return request.auth != null && request.auth.uid == 'iS3KPlQsxMZQKQLQEjUAzNKH9WC3';
+    }
+
+    match /comentarios/{id} {
+      // El público solo ve los aprobados; tú ves todos
+      allow read: if resource.data.aprobado == true || esAdmin();
+
+      // Cualquiera puede enviar, pero siempre queda pendiente
+      allow create: if request.resource.data.aprobado == false
+                    && request.resource.data.texto is string
+                    && request.resource.data.texto.size() <= 500;
+
+      // Solo tú aprobas, ocultas o borras
+      allow update, delete: if esAdmin();
+    }
+  }
+}
+     ============================================================ -->
+
 </body>
 </html>
