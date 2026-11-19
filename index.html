@@ -218,6 +218,56 @@
     .programa:hover small { color: var(--negro); }
     a.programa { text-decoration: none; display: block; } 
 
+    /* ---------- PRÓXIMAMENTE ---------- */
+.proximamente { padding: 50px 20px; }
+.prox-caja {
+  max-width: 900px;
+  margin: auto;
+  background: var(--negro);
+  color: var(--blanco);
+  border-radius: 24px;
+  padding: 35px 30px;
+  text-align: center;
+  border: 4px dashed var(--amarillo);
+  position: relative;
+  box-shadow: 8px 8px 0 var(--rosa);
+}
+.prox-etiqueta {
+  display: inline-block;
+  background: var(--rosa);
+  color: var(--blanco);
+  font-weight: 700;
+  font-size: .85rem;
+  padding: 5px 20px;
+  border-radius: 50px;
+  margin-bottom: 12px;
+  animation: parpadeo 1.8s ease-in-out infinite;
+}
+.prox-caja h2 { font-size: 2.2rem; color: var(--amarillo); margin-bottom: 8px; }
+.prox-caja h2 span { color: var(--celeste); }
+.prox-caja p { max-width: 650px; margin: 0 auto 18px; color: #ddd; }
+.prox-items { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.prox-items span {
+  background: var(--amarillo);
+  color: var(--negro);
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: .9rem;
+}
+.prox-items span:nth-child(2) { background: var(--celeste); }
+.prox-items span:nth-child(3) { background: var(--naranja); }
+.prox-items span:nth-child(4) { background: var(--rosa); color: var(--blanco); }
+
+@keyframes parpadeo {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@media (max-width: 800px) {
+  .prox-caja h2 { font-size: 1.7rem; }
+}
+
     /* ---------- CARRERAS ---------- */
     .carreras { background: var(--gris); }
     .carreras-lista { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
@@ -246,6 +296,7 @@
       position: relative;
       transition: transform .3s;
     }
+
     .paquete:hover { transform: translateY(-10px); }
     .paquete h3 { font-size: 1.8rem; }
     .paquete .precio { font-family: 'Anton', sans-serif; font-size: 2.8rem; color: var(--rosa); margin: 8px 0; }
@@ -478,7 +529,21 @@
       </div>
     </div>
   </section>
-
+  <!-- ===== PRÓXIMAMENTE ===== -->
+  <section class="proximamente">
+    <div class="prox-caja">
+      <span class="prox-etiqueta">🚀 PRÓXIMAMENTE</span>
+      <h2>Venta de <span>periféricos y accesorios</span></h2>
+      <p>Muy pronto tendremos a la venta periféricos, accesorios y piezas para computadoras y laptops. ¡Mantente atento a nuestras redes!</p>
+      <div class="prox-items">
+        <span>🖱️ Periféricos</span>
+        <span>🎧 Accesorios</span>
+        <span>🔧 Piezas para PC</span>
+        <span>💻 Piezas para laptops</span>
+      </div>
+    </div>
+  </section>
+  
   <!-- ===== PAQUETES ===== -->
   <section id="paquetes">
     <div class="contenedor">
