@@ -554,9 +554,7 @@
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#programas">Próximamente</a></li>
-        <li><a href="#paquetes">Paquetes</a></li>
         <li><a href="#soporte">Soporte remoto</a></li>
-        <li><a href="#contacto">Contacto</a></li>
                 <li id="liAdmin" hidden><a href="#" id="abrirAdmin">🛠 Panel administrativo</a></li>
       </ul>
 
@@ -590,9 +588,9 @@
     <div class="hero-content">
       <div class="hero-text">
         <img class="portada" src="portada_digital.png" alt="TucanJuve">
-        <p>Instalamos los programas y herramientas digitales que necesitas para estudiar tu carrera universitaria. ¡Tú estudia, nosotros lo dejamos listo!</p>
+        <p>Dejamos tu laptop rápida y lista para estudiar. ¡Tú estudia, nosotros nos encargamos del resto!</p>
         <a href="#contacto" class="btn btn-rosa">¡Quiero mi instalación!</a>
-        <a href="#paquetes" class="btn btn-negro">Ver paquetes</a>
+        <a href="#soporte" class="btn btn-negro">Ver servicios</a>
       </div>
       <div class="hero-logo">
         <img src="logo_digital_juvenil.png" alt="Tucán TucanJuve">
@@ -1429,7 +1427,8 @@
     );
   }
 
-  function fechaMs(c) {
+  function fechaMs(c)
+   {
     const f = c.fecha;
     if (!f) return 0;
     if (typeof f.toMillis === "function") return f.toMillis();
