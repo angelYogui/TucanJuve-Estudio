@@ -3,11 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TucanJuve | Programas y herramientas digitales para universitarios</title>
+  <title>TucanJuve | Soporte remoto y herramientas para estudiantes</title>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TucanJuve">
+  <meta property="og:title" content="TucanJuve | Soporte remoto y herramientas para estudiantes">
+  <meta property="og:description" content="Dejamos tu laptop rápida y lista para estudiar. Limpieza, instalación de herramientas gratuitas y plantillas académicas.">
+  <meta property="og:url" content="https://angelyogui.github.io/TucanJuve-Estudio/">
+  <meta property="og:image" content="https://angelyogui.github.io/TucanJuve-Estudio/portada_digital.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_PE">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
+  <meta name="description" content="TucanJuve ofrece soporte remoto para estudiantes universitarios: limpieza y aceleración de laptops, instalación de herramientas gratuitas y plantillas académicas con normas APA.">
+  <meta name="theme-color" content="#111111">
+  <link rel="canonical" href="https://angelyogui.github.io/TucanJuve-Estudio/">
+  <link rel="icon" type="image/png" href="logo_digital_juvenil.png">
+  <link rel="apple-touch-icon" href="logo_digital_juvenil.png">
+
+ <meta name="google-site-verification" content="TzkgBqGqgb_Fn6cR0LnPw2BgJz7S5fyIfVxwdDmNLEE" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "TucanJuve",
+    "url": "https://angelyogui.github.io/TucanJuve-Estudio/",
+    "image": "https://angelyogui.github.io/TucanJuve-Estudio/logo_digital_juvenil.png",
+    "description": "Soporte remoto y recursos digitales para estudiantes universitarios.",
+    "telephone": "+51934288733",
+    "areaServed": "PE",
+    "sameAs": [
+      "https://www.instagram.com/tucanjuve",
+      "https://www.tiktok.com/@tucan.juve",
+      "https://www.youtube.com/@TucanJuve"
+    ]
+  }
+  </script>
   <style>
     :root {
       --negro: #111111;
@@ -537,6 +572,29 @@
       .nav-usuario { display: none; }
       .btn-nav { padding: 8px 12px; }
     }
+
+        /* ---------- FORMULARIO DE PEDIDO ---------- */
+    .pedido { background: var(--blanco); }
+    .ped-form {
+      max-width: 700px; margin: auto; background: var(--gris);
+      border-radius: 24px; padding: 30px 28px;
+      border-top: 8px solid var(--rosa); box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    }
+    .ped-form .fila { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .ped-form label { display: block; font-weight: 700; margin: 12px 0 4px; font-size: .9rem; }
+    .ped-form input, .ped-form select, .ped-form textarea {
+      width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 12px;
+      font-family: inherit; font-size: .95rem; background: var(--blanco);
+    }
+    .ped-form input:focus, .ped-form select:focus, .ped-form textarea:focus {
+      outline: none; border-color: var(--celeste);
+    }
+    .ped-form textarea { resize: vertical; }
+    .ped-form .btn { margin: 20px 0 0; border: none; cursor: pointer; font-family: inherit; font-size: 1rem; width: 100%; }
+    .ped-error { color: var(--rosa); font-weight: 600; margin-top: 10px; min-height: 1.2em; }
+    .ped-nota { font-size: .82rem; color: #666; margin-top: 10px; text-align: center; }
+    @media (max-width: 600px) { .ped-form .fila { grid-template-columns: 1fr; } }
+
   </style>
 </head>
 
@@ -555,6 +613,8 @@
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#programas">Próximamente</a></li>
         <li><a href="#soporte">Soporte remoto</a></li>
+        <li><a href="#pedido">Pedir servicio</a></li>
+        <li><a href="#contacto">Contacto</a></li>
                 <li id="liAdmin" hidden><a href="#" id="abrirAdmin">🛠 Panel administrativo</a></li>
       </ul>
 
@@ -823,6 +883,60 @@
     </div>
   </section>
 
+    <!-- ===== FORMULARIO DE PEDIDO ===== -->
+  <section class="pedido" id="pedido">
+    <div class="contenedor">
+      <div class="titulo">
+        <h2>Pide tu <span>servicio</span></h2>
+        <div class="linea"></div>
+      </div>
+
+      <form class="ped-form" id="pedForm" novalidate>
+        <div class="fila">
+          <div>
+            <label for="pedNombre">Tu nombre</label>
+            <input type="text" id="pedNombre" maxlength="60" placeholder="Ej: María">
+          </div>
+          <div>
+            <label for="pedCarrera">Tu carrera</label>
+            <input type="text" id="pedCarrera" maxlength="60" placeholder="Ej: Arquitectura">
+          </div>
+        </div>
+
+        <div class="fila">
+          <div>
+            <label for="pedEquipo">Tu equipo</label>
+            <select id="pedEquipo">
+              <option value="">Elige una opción</option>
+              <option>Windows 10 / 11</option>
+              <option>Mac</option>
+              <option>Linux</option>
+              <option>No estoy seguro</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="pedServicio">¿Qué necesitas?</label>
+            <select id="pedServicio">
+              <option value="">Elige una opción</option>
+              <option>Limpieza y Aceleración</option>
+              <option>Pack Estudiante</option>
+              <option>Kit de Plantillas Académicas</option>
+              <option>Otra consulta</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="pedDetalle">Cuéntanos más (opcional)</label>
+        <textarea id="pedDetalle" rows="3" maxlength="300" placeholder="Ej: mi laptop tarda mucho en encender..."></textarea>
+
+        <p class="ped-error" id="pedError"></p>
+        <button class="btn btn-rosa" type="submit">💬 Enviar pedido por WhatsApp</button>
+        <p class="ped-nota">Al enviar se abre WhatsApp con tu mensaje listo. No se guarda ningún dato en la página.</p>
+      </form>
+    </div>
+  </section>
+
   <!-- ===== OPINIONES ===== -->
   <section class="opiniones" id="opiniones">
     <div class="contenedor">
@@ -972,6 +1086,29 @@
       });
     }, { threshold: 0.5 });
     contadores.forEach(c => observador.observe(c));
+
+        /* ---------- Formulario de pedido -> WhatsApp ---------- */
+    document.getElementById("pedForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const v = id => document.getElementById(id).value.trim();
+      const error = document.getElementById("pedError");
+
+      if (!v("pedNombre") || !v("pedCarrera") || !v("pedEquipo") || !v("pedServicio")) {
+        error.textContent = "Completa tu nombre, carrera, equipo y el servicio que necesitas.";
+        return;
+      }
+      error.textContent = "";
+
+      let mensaje =
+        "Hola TucanJuve, quiero pedir un servicio.\n" +
+        "Nombre: " + v("pedNombre") + "\n" +
+        "Carrera: " + v("pedCarrera") + "\n" +
+        "Equipo: " + v("pedEquipo") + "\n" +
+        "Servicio: " + v("pedServicio");
+      if (v("pedDetalle")) mensaje += "\nDetalle: " + v("pedDetalle");
+
+      window.open("https://wa.me/51934288733?text=" + encodeURIComponent(mensaje), "_blank");
+    });
 
   </script>
     <script type="module">
